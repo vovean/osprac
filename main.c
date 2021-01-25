@@ -1,6 +1,11 @@
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 int main() {
-    system("echo $USER && echo $GID");
+    printf("UID: %d\r\n", (int) getpid());
+    printf("GID: %d\r\n", (int) getppid());
     return 0;
 }
+
+
