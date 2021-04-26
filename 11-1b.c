@@ -10,7 +10,7 @@
 
 int main(void) {
     int msqid;
-    char pathname[] = "11_1a.c";
+    char pathname[] = "11-1a.c";
     key_t key;
     int maxlen;
 
