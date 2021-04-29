@@ -36,9 +36,9 @@ int main(void) {
 
     for (short i = 1; i <= 5; i++) {
         maxlen = sizeof(mybuf.info);
-        // here to show some difference lets accept only messages of type 2
-        if ((len = msgrcv(msqid, &mybuf, maxlen, 2, 0)) < 0) {
-            printf("Can\'t receive message of type 2 from queue\n\r");
+        // accept only messages of type 1...5
+        if ((len = msgrcv(msqid, &mybuf, maxlen, i, 0)) < 0) {
+            printf("Can\'t receive message from queue\n\r");
             exit(-1);
         }
 
@@ -55,7 +55,8 @@ int main(void) {
         // Fill in the structure for the message and
         // determine the length of the informative part.
         //
-        mybuf.mtype = i;
+        // 11...15
+        mybuf.mtype = 11 + i;
         mybuf.info.sinfo = i;
         mybuf.info.finfo = (float) i;
         len = sizeof(mybuf.info);
