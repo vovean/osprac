@@ -31,15 +31,15 @@ void do_recursive_symlink(char *current_file, int len, int *depth) {
     // try create symlink
     if (symlink(current_file, next_file) == -1) return;
     // try opening the file to check if symlink is working
-    int file_descriptor;
-    if ((file_descriptor = open(next_file, O_RDWR | O_CREAT, 0666)) < 0) {
+    int check = open(next_file, O_RDWR | O_CREAT, 0666);
+    if (check < 0) {
         if (remove(next_file) < 0) {
             printf("Failed to remove file\n");
             exit(-1);
         }
         return;
     }
-    if (close(file_descriptor) < 0) {
+    if (close(check) < 0) {
         printf("Failed to close the file\n");
         exit(-1);
     }
